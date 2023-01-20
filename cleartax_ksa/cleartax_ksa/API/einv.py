@@ -10,10 +10,9 @@ def generate_einv(**kwargs):
         data = {
             'invoice': invoice.as_dict(),
             'customer': utils.get_dict('Customer',invoice.customer),
-            'billing_address': utils.get_dict('Address',invoice.company_address),
+            'company': utils.get_dict('Company', invoice.company),
+            'company_address': utils.get_dict('Address',invoice.company_address),
             'customer_address': utils.get_dict('Address',invoice.customer_address),
-            'shipping_address': utils.get_dict('Address',invoice.shipping_address_name),
-            'dispatch_address': utils.get_dict('Address',invoice.dispatch_address_name),
             'item_list': [utils.get_dict('Item', row.item_code) for row in invoice.items]
         }
         return einv_request(data,invoice.name)
