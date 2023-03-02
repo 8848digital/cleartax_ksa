@@ -13,7 +13,8 @@ def generate_einv(**kwargs):
             'company': utils.get_dict('Company', invoice.company),
             'company_address': utils.get_dict('Address',invoice.company_address),
             'customer_address': utils.get_dict('Address',invoice.customer_address),
-            'item_list': [utils.get_dict('Item', row.item_code) for row in invoice.items]
+            'item_list': [utils.get_dict('Item', row.item_code) for row in invoice.items],
+            'vat_settings': utils.get_dict('KSA VAT Settings',{'company':invoice.company})
         }
         return einv_request(data,invoice.name)
     except Exception as e:
