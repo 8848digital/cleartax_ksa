@@ -15,6 +15,7 @@
   "enterprise_section",
   "production_auth_token",
   "sandbox_auth_token",
+  "device_id",
   "section_break_10",
   "host_url",
   "bulk_upload_section",
@@ -92,12 +93,17 @@
    "fieldname": "sales_invoices_from",
    "fieldtype": "Date",
    "label": "Sales Invoices From"
+  },
+  {
+   "fieldname": "device_id",
+   "fieldtype": "Password",
+   "label": "Device ID"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2023-01-10 13:21:11.528697",
+ "modified": "2023-04-11 05:36:17.403624",
  "modified_by": "Administrator",
  "module": "Cleartax Ksa",
  "name": "Cleartax Settings",
