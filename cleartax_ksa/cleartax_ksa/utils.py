@@ -8,7 +8,8 @@ from pyqrcode import create as qr_create
 
 def create_cl_qr(qr,inv):
     doc = frappe.get_doc('Sales Invoice',inv)
-    base64_string = b64encode(bytes.fromhex(qr)).decode()
+    qr_data = bytes(qr, 'utf-8')
+    base64_string = b64encode(qr_data).decode()
     qr_image = io.BytesIO()
     url = qr_create(base64_string, error="L")
     url.png(qr_image, scale=2, quiet_zone=1)
