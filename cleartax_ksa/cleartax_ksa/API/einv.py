@@ -60,6 +60,7 @@ def store_irn_details(inv,response):
                     'invoice_xml': response.get('InvoiceXml')
                 }
         frappe.db.set_value("Sales Invoice", inv, values)
+        utils.create_cl_qr(response.get('QRCode'),inv)
         frappe.db.commit()
     except Exception as e:
         frappe.logger('cleartax').exception(e)

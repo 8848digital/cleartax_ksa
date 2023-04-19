@@ -1,5 +1,34 @@
 import frappe
 import json
+import io
+import os
+from base64 import b64encode
+from pyqrcode import create as qr_create
+
+
+def create_cl_qr(qr,inv):
+    doc = frappe.get_doc('Sales Invoice',inv)
+    base64_string = b64encode(bytes.fromhex(qr)).decode()
+    qr_image = io.BytesIO()
+    url = qr_create(base64_string, error="L")
+    url.png(qr_image, scale=2, quiet_zone=1)
+    name = frappe.generate_hash(doc.name, 5)
+    # making file
+    filename = f"QRCode-{name}.png".replace(os.path.sep, "__")
+    _file = frappe.get_doc(
+        {
+            "doctype": "File",
+            "file_name": filename,
+            "is_private": 0,
+            "content": qr_image.getvalue(),
+            "attached_to_doctype": doc.get("doctype"),
+            "attached_to_name": doc.get("name"),
+            "attached_to_field": "cleartax_qr",
+        }
+    )
+    _file.save()
+    # assigning to document
+    doc.db_set("cleartax_qr", _file.file_url)
 
 def get_dict(type,doc):
     if frappe.db.exists(type,doc):
