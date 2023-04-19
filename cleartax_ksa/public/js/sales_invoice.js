@@ -1,5 +1,6 @@
 frappe.ui.form.on('Sales Invoice', {
 	refresh(frm) {
+		console.log(frm.selected_doc.ksa_qr)
 		if (frm.selected_doc.docstatus == 1 && frm.selected_doc.ksa_qr == undefined) {
 						cur_frm.add_custom_button(__("E-Invoice"), function () {
 							frappe.call({
