@@ -44,8 +44,6 @@ def einv_request(data,inv):
                 store_irn_details(inv,response['response'])
                 return utils.success_response()
             return utils.response_error_handling(json.loads(json.dumps(response['response'])))
-
-
     except Exception as e:
         frappe.logger('cleartax').exception(e)
 
@@ -53,7 +51,6 @@ def einv_request(data,inv):
 @frappe.whitelist()
 def store_irn_details(inv,response):
     try:
-        frappe.logger('cleartax').exception(response)
         values = {
                     'ksa_qr': response.get('QRCode'),
                     'raw_qr': response.get('RawQRCode'),
