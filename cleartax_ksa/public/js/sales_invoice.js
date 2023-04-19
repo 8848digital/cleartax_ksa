@@ -1,7 +1,7 @@
 frappe.ui.form.on('Sales Invoice', {
 	refresh(frm) {
 		console.log(frm.selected_doc.ksa_qr)
-		if (frm.selected_doc.docstatus == 1 && (frm.selected_doc.ksa_qr == undefined || frm.selected_doc.ksa_qr == null) ) {
+		if (frm.selected_doc.docstatus == 1 && (frm.selected_doc.ksa_qr == undefined || frm.selected_doc.ksa_qr == "") ) {
 						cur_frm.add_custom_button(__("E-Invoice"), function () {
 							frappe.call({
 								method: "cleartax_ksa.cleartax_ksa.API.einv.generate_einv",
